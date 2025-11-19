@@ -16,8 +16,13 @@ def role_required(*allowed_roles):
         def wrapper(*args, **kwargs):
             role = session.get("role")
             if role not in allowed_roles:
-                flash("Access denied.", "danger")
-                return redirect(url_for("main.dashboard"))
+                if role == "user":
+                    return redirect(url_for("main.dashboard"))
+                elif role == "admin":
+                    return redirect(url_for("main.admin_area"))
+                else:
+                    flash("Access denied.", "danger")
+                    return redirect(url_for("main.dashboard"))
             return f(*args, **kwargs)
         return wrapper
     return decorator

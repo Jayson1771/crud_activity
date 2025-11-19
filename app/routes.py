@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template
 from .decorators import login_required, role_required
-
 bp = Blueprint("main", __name__)
 
 @bp.route("/")
@@ -9,6 +8,7 @@ def index():
 
 @bp.route("/dashboard")
 @login_required
+@role_required("user")
 def dashboard():
     return render_template("dashboard.html")
 
@@ -16,4 +16,4 @@ def dashboard():
 @login_required
 @role_required("admin")
 def admin_area():
-    return "Admin page only"
+    return render_template("admin/admin.html")

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Employee Salary</h2>
+<a href="{{ url_for('cruds.add_salary') }}" class="btn btn-primary mb-3">Add Employee</a>
+<a href="{{ url_for('auth.logout') }}" class="btn btn-danger mb-3">
+    Logout
+</a>
+<table class="table table-bordered">
+    <thead>
+        <tr><th>ID</th><th>Name</th><th>Employee Status</th><th>Rate Per Hour</th><th>Number of Hours Work</th><th>Net Pay</th><th>Take Home Pay</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+        {% for salary in salary %}
+        <tr>
+            <td>{{ salary.id }}</td>
+            <td>{{ salary.name }}</td>
+            <td>{{ salary.MembershipType }}</td>
+            <td>{{ salary.Rate }}</td>
+            <td>{{ salary.HoursWork }}</td>
+            <td>{{ salary.NetPay }}</td>
+            <td>{{ salary.deductions }}</td>
+            <td>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

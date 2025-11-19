@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Add New Employee</h2>
+<form method="POST">
+    <div class="mb-3">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Employee Status</label>
+        <select name="MembershipType" id="">
+            <option value="Regular">Regular</option>
+            <option value="Part-time">Part-time</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Rate Per Hour</label>
+        <input type="text" name="Rate" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Number of Hours Work</label>
+        <input type="text" name="HoursWork" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
+{% endblock %}
