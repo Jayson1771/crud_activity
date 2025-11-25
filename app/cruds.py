@@ -1,15 +1,15 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .models import db, Salary
 
-app = Blueprint("cruds", __name__, url_prefix="/cruds")
+bp = Blueprint("cruds", __name__, url_prefix="/cruds")
 
 
-@app.route('/admin')
+@bp.route('/admin')
 def home():
     salary = Salary.query.all()
-    return render_template('cruds.home', salary=salary)
+    return render_template('admin/admin.html', salary=salary)
 
-@app.route('/add', methods=['GET', 'POST'])
+@bp.route('/add', methods=['GET', 'POST'])
 def add_salary():
     if request.method == 'POST':
         name = request.form['name']
@@ -38,7 +38,7 @@ def add_salary():
             return redirect(url_for('cruds.home'))
     return render_template('admin/add.html')
 
-@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+@bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_salary(id):
     salary = Salary.query.get_or_404(id)
     if request.method == 'POST':
@@ -59,9 +59,9 @@ def edit_salary(id):
             db.session.commit()
             flash('Salary updated successfully!')
         return redirect(url_for('cruds.home'))
-    return render_template('edit.html', salary=salary)
+    return render_template('admin/edit.html', salary=salary)
 
-@app.route('/delete/<int:id>')
+@bp.route('/delete/<int:id>')
 def delete_salary(id):
     salary = Salary.query.get_or_404(id)
     db.session.delete(salary)

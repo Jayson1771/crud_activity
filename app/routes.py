@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template
 from .decorators import login_required, role_required
+from .models import Salary
 bp = Blueprint("main", __name__)
 
 @bp.route("/")
@@ -10,10 +11,12 @@ def index():
 @login_required
 @role_required("user")
 def dashboard():
-    return render_template("dashboard.html")
+    salary = Salary.query.all()
+    return render_template("dashboard.html", salary=salary)
 
 @bp.route("/admin")
 @login_required
 @role_required("admin")
 def admin_area():
-    return render_template("admin/admin.html")
+    salary = Salary.query.all()
+    return render_template('admin/admin.html', salary=salary)

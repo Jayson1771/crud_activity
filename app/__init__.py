@@ -19,8 +19,8 @@ def create_app():
 
     from .auth import bp as auth_bp
     from .routes import bp as main_bp
-
+    from .cruds import bp as cruds_bp
     app.register_blueprint(auth_bp)
     app.register_blueprint(main_bp)
-
+    app.register_blueprint(cruds_bp)
     return app

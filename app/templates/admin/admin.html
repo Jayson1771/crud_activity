@@ -20,6 +20,8 @@
             <td>{{ salary.NetPay }}</td>
             <td>{{ salary.deductions }}</td>
             <td>
+                <a href="{{ url_for('cruds.edit_salary', id=salary.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{{ url_for('cruds.delete_salary', id=salary.id) }}" class="btn btn-danger btn-sm">Delete</a>
             </td>
         </tr>
         {% endfor %}
