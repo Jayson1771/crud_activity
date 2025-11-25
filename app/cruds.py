@@ -26,6 +26,9 @@ def add_salary():
         salary = Salary.query.all()
         if not name.strip():
             flash("Please fill correctly")
+        elif salary.HoursWork.isalpha() or salary.Rate.isalpha():
+            flash("Please input correct values")
+            return redirect(url_for('cruds.edit_salary', id=salary.id))
         elif float(Rate) <= 0:
             flash("Please fill correctly")
         elif float(HoursWork) <= 0:
