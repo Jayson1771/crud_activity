@@ -26,7 +26,7 @@ class Salary(db.Model):
     name= db.Column(db.String(100), nullable=False)
     MembershipType = db.Column(db.String(50), nullable=True)
     Rate = db.Column(db.Float, nullable=False)
-    HoursWork = db.Column(db.Integer, nullable=True)
+    HoursWork = db.Column(db.Float, nullable=True)
     NetPay = db.Column(db.Float, nullable=False)
     deductions = db.Column(db.Float, nullable=False)
     def __repr__(self):
