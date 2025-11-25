@@ -20,15 +20,9 @@ def add_salary():
         MembershipType = request.form['MembershipType']
         Rate = request.form['Rate']
         HoursWork = request.form['HoursWork']
-        NetPay = float(Rate) * float(HoursWork)
-        deductions = float(NetPay) * (0.10)
-        takehome = float(NetPay) - float(deductions)
         salary = Salary.query.all()
         if not name.strip():
             flash("Please fill correctly")
-        elif salary.HoursWork.isalpha() or salary.Rate.isalpha():
-            flash("Please input correct values")
-            return redirect(url_for('cruds.edit_salary', id=salary.id))
         elif float(Rate) <= 0:
             flash("Please fill correctly")
         elif float(HoursWork) <= 0:
@@ -38,6 +32,9 @@ def add_salary():
                 flash("Error")
                 break
         else:
+            NetPay = float(Rate) * float(HoursWork)
+            deductions = float(NetPay) * (0.10)
+            takehome = float(NetPay) - float(deductions)
             new_salary = Salary(name=name, MembershipType=MembershipType, Rate=Rate, HoursWork=HoursWork, NetPay=NetPay, deductions=takehome)
             db.session.add(new_salary)
             db.session.commit()
